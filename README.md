@@ -1,0 +1,2 @@
+# vimdot
+vimrc
