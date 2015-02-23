@@ -1,2 +1,3 @@
 # vimdot
-A custom .vimrc to turn vim into a powerful ide
+A custom and stylish .vimrc to turn vim into a powerful ide.
+Thank you vim devs!
