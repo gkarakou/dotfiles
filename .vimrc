@@ -9,7 +9,7 @@ set viminfo='20,\"50	" read/write a .viminfo file, don't store more
 			" than 50 lines of registers
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
-set shell=/bin/bash    "change the shell
+set shell=/bin/sh    "change the shell
 set nomodeline
 "set wildignore=*.so
 set wildignore=*.ko
@@ -62,6 +62,7 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 filetype indent on
+set number 
 set laststatus=2
 filetype plugin on
 endif
@@ -88,13 +89,14 @@ execute pathogen#infect()
 call pathogen#helptags()
 "SuperTab
 "let g:SuperTabDefaultCompletionType = "context"
-"set completeopt=menuone,longest,preview
-"au FileType python set omnifunc=pythoncomplete#Complete
+set completeopt=menuone,longest,preview
+au FileType python set omnifunc=pythoncomplete#Complete
 "pymode
 " let g:pymode_rope = 0
-
+"gundo
+nnoremap <F6> :GundoToggle<CR>
 "ycm
-let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'
+"let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'
 
 "airline plugin
 let g:airline#extensions#tabline#enabled = 1
@@ -112,6 +114,7 @@ let g:syntastic_php_checkers = ['php','phpcs','phpmd']
 let g:syntastic_php_phpcs_args = "--standard=zend -n --report=csv"
 "NERDTree
 autocmd vimenter * NERDTree
+let NERDTreeShowHidden=1
 "tagbar
 nmap <F8> :TagbarToggle<CR>
 "vim-theming
@@ -122,5 +125,10 @@ colorscheme solarized
 let g:solarized_visibility=   "high"
 let g:solarized_degrade= 1
 let g:solarized_contrast  =   "high"
+"pydiction
+    let g:pydiction_location = '/home/xguest/.vim/bundle/pydiction/complete-dict' 
+"
+"exuberant ctags
+:set tags=./tags;/
 "plugins end
 "--------------------------------------
