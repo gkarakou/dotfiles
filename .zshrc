@@ -2,7 +2,9 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt HIST_IGNORE_DUPS
-setopt appendhistory autocd extendedglob nomatch notify
+setopt autocd extendedglob nomatch notify
+setopt inc_append_history
+setopt share_history
 setopt IGNORE_EOF
 setopt RM_STAR_WAIT
 setopt NO_CASE_GLOB
@@ -116,15 +118,15 @@ _force_rehash() {
 
 #{{{ Prompt!
 #
-host_color=cyan
-history_color=yellow
+host_color=yellow
+history_color=cyan
 user_color=green
 root_color=red
 directory_color=magenta
 error_color=red
 jobs_color=green
 #
-host_prompt="%{$fg_bold[$host_color]%}%m%{$reset_color%}"
+host_prompt="%{$fg[$host_color]%}%m%{$reset_color%}"
 #
 jobs_prompt1="%{$fg_bold[$jobs_color]%}(%{$reset_color%}"
 #
@@ -168,5 +170,4 @@ case "$TERM" in
                                 post_prompt="%{$fg_bold[$user_color]%}%#%{$reset_color%}"
                                 fi
 
-                                PS1="%{$fg_bold[cyan]%}%n@${host_prompt} ${jobs_total}${history_total} ${directory_prompt}${error_total}${post_prompt} "
-
+                                PS1="%{$fg[yellow]%}%n@${host_prompt} ${jobs_total}${history_total} ${directory_prompt}${error_total}${post_prompt} "
