@@ -119,4 +119,7 @@ zstyle ':completion::approximate*:*' prefix-needed false
 
 
 
-
+_force_rehash() {
+      (( CURRENT == 1 )) && rehash
+        return 1  # Because we didn't really complete anything
+    }
