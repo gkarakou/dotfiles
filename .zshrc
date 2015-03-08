@@ -1,4 +1,3 @@
-# Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -7,14 +6,10 @@ setopt appendhistory autocd extendedglob nomatch notify
 setopt IGNORE_EOF
 setopt RM_STAR_WAIT
 setopt NO_CASE_GLOB
-# Be Reasonable!
- setopt NUMERIC_GLOB_SORT
+setopt NUMERIC_GLOB_SORT
 bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-
 autoload -U colors && colors
-PROMPT="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[yellow]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%"
+#PROMPT="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[yellow]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%"
 LESSSECURE=1
 export LESSSECURE
 export EDITOR="vim"
@@ -25,7 +20,6 @@ autoload -Uz compinit
 compinit
 autoload -U zcalc zsh-mime-setup
 zsh-mime-setup
-#key bindings
  bindkey "\e[1~" beginning-of-line
  bindkey "\e[4~" end-of-line
  bindkey "\e[5~" beginning-of-history
@@ -39,16 +33,12 @@ zsh-mime-setup
  bindkey "\ee[C" forward-word
  bindkey "\ee[D" backward-word
  bindkey "^H" backward-delete-word
- # for rxvt
  bindkey "\e[8~" end-of-line
  bindkey "\e[7~" beginning-of-line
- # for non RH/Debian xterm, can't hurt for RH/DEbian xterm
  bindkey "eOH" beginning-of-line
  bindkey "eOF" end-of-line
- # for freebsd console
  bindkey "\e[H" beginning-of-line
  bindkey "\e[F" end-of-line
- # completion in the middle of a line
  bindkey '^i' expand-or-complete-prefix
  alias ll='ls -al'
  alias mv='mv -i'
@@ -123,3 +113,60 @@ _force_rehash() {
       (( CURRENT == 1 )) && rehash
         return 1  # Because we didn't really complete anything
     }
+
+#{{{ Prompt!
+#
+host_color=cyan
+history_color=yellow
+user_color=green
+root_color=red
+directory_color=magenta
+error_color=red
+jobs_color=green
+#
+host_prompt="%{$fg_bold[$host_color]%}%m%{$reset_color%}"
+#
+jobs_prompt1="%{$fg_bold[$jobs_color]%}(%{$reset_color%}"
+#
+jobs_prompt2="%{$fg[$jobs_color]%}%j%{$reset_color%}"
+#
+jobs_prompt3="%{$fg_bold[$jobs_color]%})%{$reset_color%}"
+#
+jobs_total="%(1j.${jobs_prompt1}${jobs_prompt2}${jobs_prompt3} .)"
+#
+history_prompt1="%{$fg_bold[$history_color]%}[%{$reset_color%}"
+#
+history_prompt2="%{$fg[$history_color]%}%h%{$reset_color%}"
+#
+history_prompt3="%{$fg_bold[$history_color]%}]%{$reset_color%}"
+#
+history_total="${history_prompt1}${history_prompt2}${history_prompt3}"
+#
+error_prompt1="%{$fg_bold[$error_color]%}<%{$reset_color%}"
+#
+error_prompt2="%{$fg[$error_color]%}%?%{$reset_color%}"
+#
+error_prompt3="%{$fg_bold[$error_color]%}>%{$reset_color%}"
+#
+error_total="%(?..${error_prompt1}${error_prompt2}${error_prompt3} )"
+#
+case "$TERM" in
+  (screen)
+      function precmd() { print -Pn "\033]0;S $TTY:t{%100<...<%~%<<}\007" }
+        ;;
+          (xterm)
+              directory_prompt=""
+                ;;
+                  (*)
+                      directory_prompt="%{$fg[$directory_color]%}%~%{$reset_color%} "
+                        ;;
+                        esac
+
+                        if [[ $USER == root ]]; then
+                            post_prompt="%{$fg_bold[$root_color]%}%#%{$reset_color%}"
+                            else
+                                post_prompt="%{$fg_bold[$user_color]%}%#%{$reset_color%}"
+                                fi
+
+                                PS1="%{$fg_bold[cyan]%}%n@${host_prompt} ${jobs_total}${history_total} ${directory_prompt}${error_total}${post_prompt} "
+
