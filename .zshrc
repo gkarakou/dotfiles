@@ -2,7 +2,13 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
+setopt HIST_IGNORE_DUPS
 setopt appendhistory autocd extendedglob nomatch notify
+setopt IGNORE_EOF
+setopt RM_STAR_WAIT
+setopt NO_CASE_GLOB
+# Be Reasonable!
+ setopt NUMERIC_GLOB_SORT
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -17,14 +23,8 @@ autoload -U promptinit
 promptinit
 autoload -Uz compinit
 compinit
-setopt HIST_IGNORE_DUPS
-setopt IGNORE_EOF
-setopt RM_STAR_WAIT
-setopt NO_CASE_GLOB
-# Be Reasonable!
- setopt NUMERIC_GLOB_SORT
-# # I don't know why I never set this before.
- setopt EXTENDED_GLOB
+autoload -U zcalc zsh-mime-setup
+zsh-mime-setup
 #key bindings
  bindkey "\e[1~" beginning-of-line
  bindkey "\e[4~" end-of-line
