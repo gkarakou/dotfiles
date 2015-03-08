@@ -6,7 +6,6 @@ setopt appendhistory autocd extendedglob nomatch notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/xguest/.zshrc'
 
 autoload -U colors && colors
 PROMPT="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[yellow]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%"
