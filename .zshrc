@@ -43,3 +43,7 @@ setopt HIST_IGNORE_DUPS
  bindkey "\e[F" end-of-line
  # completion in the middle of a line
  bindkey '^i' expand-or-complete-prefix
+ alias ll='ls -al'
+ alias mv='mv -i'
+ alias cp='cp -R'
+ alias rm='rm -i' 
