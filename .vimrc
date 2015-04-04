@@ -2,6 +2,41 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    set fileencodings=ucs-bom,utf-8,latin1
 endif
 set nocompatible	" Use Vim defaults (much better!)
+filetype off                  " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+" "call vundle#begin('~/some/path/here')
+"
+" " let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'scrooloose/syntastic'
+
+Plugin 'altercation/vim-colors-solarized'
+
+Plugin 'bling/vim-airline'
+
+Plugin 'majutsushi/tagbar'
+
+Plugin 'davidhalter/jedi-vim'
+
+Plugin 'duff/vim-trailing-whitespace'
+
+Plugin 'heavenshell/vim-pydocstring'
+
+Plugin 'jistr/vim-nerdtree-tabs'
+
+Plugin 'cburroughs/pep8.py'
+
+Plugin 'powerline/fonts'
+
+call vundle#end()
+
 set bs=indent,eol,start		" allow backspacing over everything in insert mode
 "set ai			" always set autoindenting on
 "set backup		" keep a backup file
@@ -9,11 +44,9 @@ set viminfo='20,\"50	" read/write a .viminfo file, don't store more
 			" than 50 lines of registers
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
-set shell=/bin/sh    "change the shell
+set shell=/bin/sh       " change the shell
 set nomodeline
-"set wildignore=*.so
-set wildignore=*.ko
-set wildignore=*.img
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.img,*.ko
 set tabstop=8
 set expandtab
 set softtabstop=4
@@ -62,7 +95,7 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 filetype indent on
-set number 
+set number
 set laststatus=2
 filetype plugin on
 endif
@@ -71,7 +104,14 @@ filetype plugin on
 set foldmethod=indent
 set foldlevel=99
 set hidden
+set confirm
 set laststatus=2
+" Disable stupid backup and swap files - they trigger too many events
+"" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+
 " Use 256 colours (Use this setting only if your terminal supports 256
 " colours)
 if &term=="xterm"
@@ -85,8 +125,6 @@ let &guicursor = &guicursor . ",a:blinkon0"
 "-----------------------------------
 "start plugins
 "plugin manager pathogen
-execute pathogen#infect()
-call pathogen#helptags()
 "SuperTab
 "let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
@@ -95,9 +133,6 @@ au FileType python set omnifunc=pythoncomplete#Complete
 " let g:pymode_rope = 0
 "gundo
 nnoremap <F6> :GundoToggle<CR>
-"ycm
-"let g:ycm_path_to_python_interpreter = '/usr/bin/python2.7'
-
 "airline plugin
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -113,8 +148,14 @@ let g:syntastic_html_checkers = ['validator','w3']
 let g:syntastic_php_checkers = ['php','phpcs','phpmd']
 let g:syntastic_php_phpcs_args = "--standard=zend -n --report=csv"
 "NERDTree
-autocmd vimenter * NERDTree
+" next one will focus on NERDTree when opening a file
+"autocmd vimenter * NERDTree
 let NERDTreeShowHidden=1
+" next one will focus on the file itself when opening it
+autocmd BufNew * wincmd l
+"Nerdtreetabs
+let g:nerdtree_tabs_open_on_console_startup=1
+let g:nerdtree_tabs_focus_on_files=1
 "tagbar
 nmap <F8> :TagbarToggle<CR>
 "vim-theming
@@ -125,10 +166,9 @@ colorscheme solarized
 let g:solarized_visibility=   "high"
 let g:solarized_degrade= 1
 let g:solarized_contrast  =   "high"
-"pydiction
-    let g:pydiction_location = '/home/xguest/.vim/bundle/pydiction/complete-dict' 
-"
 "exuberant ctags
-:set tags=./tags;/
+"set tags=./tags;/
+"easytags
+"let g:easytags_dynamic_files = 1
 "plugins end
 "--------------------------------------
