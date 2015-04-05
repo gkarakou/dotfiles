@@ -41,6 +41,8 @@ Plugin 'cburroughs/pep8.py'
 
 Plugin 'powerline/fonts'
 
+Plugin 'airblade/vim-gitgutter'
+
 call vundle#end()
 
 set bs=indent,eol,start		" allow backspacing over everything in insert mode
