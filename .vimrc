@@ -1,3 +1,9 @@
+"do this first
+"mkdir -p ~/.vim/bundle
+"git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+":PluginInstall
+"sh .vim/bundle/fonts/install.sh
+
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    set fileencodings=ucs-bom,utf-8,latin1
 endif
