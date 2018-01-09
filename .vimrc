@@ -1,8 +1,9 @@
 "do this first
 "mkdir -p ~/.vim/bundle
 "git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-":PluginInstall
+"vim .vimrc --> :PluginInstall
 "sh .vim/bundle/fonts/install.sh
+"install powerline fonts for airline statusbar FROM https://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation
 
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    set fileencodings=ucs-bom,utf-8,latin1
@@ -10,7 +11,8 @@ endif
 set nocompatible	" Use Vim defaults (much better!)
 filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"call vundle#begin()
+call vundle#rc()
 " alternatively, pass a path where Vundle should install plugins
 " "call vundle#begin('~/some/path/here')
 "
@@ -25,7 +27,9 @@ Plugin 'scrooloose/syntastic'
 
 Plugin 'altercation/vim-colors-solarized'
 
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'majutsushi/tagbar'
 
@@ -39,9 +43,13 @@ Plugin 'jistr/vim-nerdtree-tabs'
 
 Plugin 'cburroughs/pep8.py'
 
+Plugin 'powerline/powerline'
+
 Plugin 'powerline/fonts'
 
 Plugin 'airblade/vim-gitgutter'
+
+"Plugin 'Localtog/vim-powerline'
 
 call vundle#end()
 
@@ -52,7 +60,7 @@ set viminfo='20,\"50	" read/write a .viminfo file, don't store more
 			" than 50 lines of registers
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
-set shell=/bin/sh       " change the shell
+set shell=/bin/false    " change the shell for zsh compatibility
 set nomodeline
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.img,*.ko
 set tabstop=8
@@ -119,14 +127,15 @@ set laststatus=2
 set nobackup
 set nowritebackup
 set noswapfile
-
+set encoding=utf-8
+set term=xterm-256color
 " Use 256 colours (Use this setting only if your terminal supports 256
 " colours)
-if &term=="xterm"
-     set t_Co=8
-     set t_Sb=[4%dm
-     set t_Sf=[3%dm
-endif
+"if &term=="xterm"
+"     set t_Co=8
+"     set t_Sb=[4%dm
+"     set t_Sf=[3%dm
+"endif
 " Don't wake up system with blinking cursor:
 " http://www.linuxpowertop.org/known.php
 let &guicursor = &guicursor . ",a:blinkon0"
@@ -144,7 +153,17 @@ nnoremap <F6> :GundoToggle<CR>
 "airline plugin
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+" old vim-powerline symbols
+"let g:airline_left_sep = '⮀'
+"let g:airline_left_alt_sep = '⮁'
+"let g:airline_right_sep = '⮂'
+"let g:airline_right_alt_sep = '⮃'
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.readonly = '⭤'
+"let g:airline_symbols.linenr = '⭡'
+
 "syntastic
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
@@ -171,9 +190,11 @@ syntax enable
 let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
-let g:solarized_visibility=   "high"
+let g:solarized_visibility="high"
 let g:solarized_degrade= 1
-let g:solarized_contrast  =   "high"
+let g:solarized_contrast="high"
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols='unicode'
 "exuberant ctags
 "set tags=./tags;/
 "easytags
