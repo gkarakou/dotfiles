@@ -60,7 +60,7 @@ set viminfo='20,\"50	" read/write a .viminfo file, don't store more
 			" than 50 lines of registers
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
-set shell=/bin/false    " change the shell for zsh compatibility
+set shell=/bin/sh    " change the shell for zsh compatibility
 set nomodeline
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.img,*.ko
 set tabstop=8
